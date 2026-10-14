@@ -1,0 +1,39 @@
+Rendered 15 views at 640x480, board found in 15
+Corner detection error vs ground truth: RMS 0.0705 px, max 0.2703 px
+
+Closed-form (Zhang, distortion ignored):
+  fx=502.599 fy=488.476 skew=-4.346 cx=319.627 cy=244.447
+
+After Levenberg-Marquardt (this repo):
+  fx =   520.080389  +/- 0.184785
+  fy =   515.047565  +/- 0.169674
+  cx =   323.109587  +/- 0.330754
+  cy =   236.324384  +/- 0.251093
+  k1 =    -0.278632  +/- 0.001167
+  k2 =     0.085966  +/- 0.004884
+  p1 =     0.001087  +/- 0.000081
+  p2 =    -0.000801  +/- 0.000071
+  RMS reprojection error = 0.0484 px (10 LM iterations)
+
+  param   ground truth        this repo    cv2.calibrateCamera   |err|/sigma
+     fx     520.000000       520.080389       520.080389           0.44
+     fy     515.000000       515.047565       515.047565           0.28
+     cx     322.500000       323.109587       323.109588           1.84
+     cy     236.800000       236.324384       236.324384           1.89
+     k1      -0.280000        -0.278632        -0.278632           1.17
+     k2       0.090000         0.085966         0.085966           0.83
+     p1       0.001200         0.001087         0.001087           1.40
+     p2      -0.000800        -0.000801        -0.000801           0.02
+  RMS (px)                      0.048420         0.068476
+
+Board-centre position error across views: mean 0.641 mm, max 0.778 mm
+
+Accuracy vs number of views (output/views_sweep.csv):
+  views,fx_err_pct,fy_err_pct,cx_err_px,cy_err_px,k1_err,rms_px
+  3,0.0263,0.0412,0.3720,0.6432,0.00324,0.0603
+  6,0.0399,0.0332,0.4216,0.6472,0.00001,0.0543
+  9,0.0452,0.0246,0.1566,0.5820,0.00095,0.0489
+  12,0.0105,0.0064,0.4332,0.3127,0.00062,0.0451
+  15,0.0155,0.0092,0.6096,0.4756,0.00137,0.0484
+
+Wrote output/views.png, output/undistort.png, output/residuals.png, output/views_sweep.csv
